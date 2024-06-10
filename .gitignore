@@ -2,3 +2,7 @@
 .config/obsidian/
 .config/pulse/
 .config/libreoffice/
+.Xresources
+.bash*
+token.git
+

@@ -32,7 +32,7 @@ ZSH_THEME="awesomepanda"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -48,7 +48,7 @@ ZSH_THEME="awesomepanda"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -107,6 +107,10 @@ source $ZSH/oh-my-zsh.sh
 alias pac="sudo pacman"
 alias wp="wal -i $HOME/Downloads/wallpapers/"
 alias theme="sudo sh $HOME/change_theme.sh"
+alias btconn="sh $HOME/bt_connect.sh connect"
+alias discon="sh $HOME/bt_connect.sh disconnect"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
 
 # zsh | oh-my-zsh
 alias zshconf="nvim $HOME/.zshrc"
@@ -130,6 +134,9 @@ alias pconf="nvim $HOME/.config/polybar/config.ini"
 # messengers
 alias tg, telegram="telegram-desktop"
 alias wa, whatsapp="whatsapp-for-linux"
+
+# python
+alias activate="source venv/bin/activate"
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
