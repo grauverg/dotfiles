@@ -508,7 +508,6 @@ beautiful.useless_gap = 5
 
 -- ========== Autoload ==========
 awful.spawn.with_shell("picom -c --blur-method 'gaussian' --blur-size 10")
--- awful.spawn.with_shell("wal -i ~/Downloads/wallpapers/")
 awful.spawn.with_shell("/home/vsevolod/change_theme.sh")
 awful.spawn.with_shell("start-pulseaudio-x11")
 awful.spawn.with_shell("/home/vsevolod/.config/polybar/launch.sh")

@@ -11,6 +11,7 @@ local function my_on_attach(bufnr)
 	-- custom mapping
 	vim.keymap.del("n", "<C-t>", { buffer = bufnr })
 	vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
+	vim.keymap.set("n", "<C-f>", api.tree.focus)
 end
 
 return {
