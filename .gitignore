@@ -6,3 +6,12 @@
 .bash*
 token.git
 
+node_modules
+node_modules
+.cache/dmenu_run
+.cache/event-sound-cache.tdb.032f3872c53b4676a491caeb334c95de.x86_64-pc-linux-gnu
+.cache/
+.cache/chromium/
+.cache/go-build/
+.cache/fontconfig/
+uni/
