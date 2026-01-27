@@ -107,11 +107,14 @@ source $ZSH/oh-my-zsh.sh
 alias pac="sudo pacman" # fast way to use pacman
 alias wp="wal -i $HOME/Downloads/wallpapers/"
 alias theme="sudo sh $HOME/change_theme.sh" 
-alias btconn="sh $HOME/bt_connect.sh connect" # connect my headphones
+alias btconn="sh $HOME/bt_connect.sh" # connect my headphones
 alias discon="sh $HOME/bt_connect.sh disconnect"
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias wifi='nmcli device wifi' # turn wifi on
+
+# get photos
+alias photo="cd $HOME/photos/рассорт && gphoto2 --get-all-files && cd $HOME"
 
 # zsh | oh-my-zsh configuration
 alias zshconf="nvim $HOME/.zshrc"
@@ -133,7 +136,7 @@ alias kittyconf, kconf="nvim $HOME/.config/kitty/kitty.conf"
 alias pconf="nvim $HOME/.config/polybar/config.ini"
 
 # messengers
-alias tg, telegram="telegram-desktop"
+# alias tg, telegram="telegram-desktop"
 alias wa, whatsapp="whatsapp-for-linux"
 
 # python
@@ -144,7 +147,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
+# Startup
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Import colorscheme from 'wal' asynchronously
@@ -177,3 +180,5 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+xbindkeys -f $HOME/.xbindkeysrc
