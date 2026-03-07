@@ -66,46 +66,13 @@ editor_cmd = terminal .. " -e " .. editor
 local modkey = "Mod4"
 local mk_alt = "Mod1"
 
-local function volume(mode)
-	local command = ""
-	if mode == "up" then
-		command = "pactl set-sink-volume @DEFAULT_SINK@ +1000"
-	end
-
-	if mode == "down" then
-		command = "pactl set-sink-volume @DEFAULT_SINK@ -1000"
-	end
-
-	if mode == "mute" then
-		command = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
-	end
-
-	return command
-end
-
-local function backlight(mode)
-	local command = ""
-
-	if mode == "up" then
-		command = "xbacklight -inc 10"
-	elseif mode == "down" then
-		if awful.spawn("xbacklight") < 10 then
-			command = "xbaclight -set 1"
-		else
-			command = "xbacklight -dec 10"
-		end
-	end
-
-	return command
-end
-
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-	awful.layout.suit.floating,
 	awful.layout.suit.tile,
-	awful.layout.suit.spiral.dwindle,
-	awful.layout.suit.spiral,
-	awful.layout.suit.fair,
+	awful.layout.suit.floating,
+	-- awful.layout.suit.spiral.dwindle,
+	-- awful.layout.suit.spiral,
+    -- awful.layout.suit.fair,
 	-- awful.layout.suit.corner.ne,
 	-- awful.layout.suit.corner.sw,
 	-- awful.layout.suit.corner.se,
@@ -143,7 +110,7 @@ menubar.utils.terminal = terminal
 
 awful.screen.connect_for_each_screen(function(s)
 	-- Each screen has its own tag table.
-	awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
+	awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful.layout.layouts[1])
 end)
 -- }}}
 
@@ -159,7 +126,7 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+	awful.key({ modkey }, "h", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 
 	-- view prev window
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
@@ -242,7 +209,7 @@ globalkeys = gears.table.join(
 		end
 	end, { description = "restore minimized", group = "client" }),
 
-	awful.key({ modkey }, "r", function()
+	awful.key({ modkey }, "s", function()
 		awful.util.spawn("rofi -show run")
 	end, { description = "run prompt", group = "My own tweaks" }),
 
@@ -258,30 +225,8 @@ globalkeys = gears.table.join(
 
 	-- ====== telegram ======
 	awful.key({ modkey }, "t", function()
-		awful.util.spawn("telegram-desktop")
-	end, { description = "open telegram", group = "My own tweaks" }),
-
-	-- ====== volume control ======
-	awful.key({ "Mod2" }, "XF86AudioRaiseVolume", function()
-		volume("up")
-	end, { description = "raise volume", group = "Volume control" }),
-
-	awful.key({ "Mod2" }, "XF86AudioLowerVolume", function()
-		volume("down")
-	end, { description = "lower volume", group = "Volume control" }),
-
-	awful.key({ "Mod2" }, "XF86AudioMute", function()
-		volume("mute")
-	end, { description = "mute volume", group = "Volume control" }),
-
-	-- ====== backlight control ======
-	awful.key({ "Mod2" }, "XF86MonBrightnessUp", function()
-		backlight("up")
-	end, { description = "brightness up", group = "Brightness control" }),
-
-	awful.key({ "Mod2" }, "XF86MonBrightnessDown", function()
-		backlight("down")
-	end, { description = "brightness down", group = "Brightness control" })
+		awful.util.spawn("Telegram")
+	end, { description = "open telegram", group = "My own tweaks" })
 )
 
 clientkeys = gears.table.join(
@@ -392,7 +337,7 @@ awful.rules.rules = {
 	{
 		rule = {},
 		properties = {
-			border_width = 1,
+			border_width = 0,
 			border_color = beautiful.border_normal,
 			focus = awful.client.focus.filter,
 			raise = true,
@@ -437,7 +382,14 @@ awful.rules.rules = {
 		},
 		properties = { floating = true },
 	},
-
+    {
+        rule = { class = "Steam" },
+        properties = { floating = false }
+    },
+    {
+        rule = { class = "TelegramDesktop" },
+        properties = { floating = false}
+    }
 	-- Add titlebars to normal clients and dialogs
 	--    { rule_any = {type = { "normal", "dialog" }
 	--      }, properties = { titlebars_enabled = true }
@@ -508,9 +460,10 @@ beautiful.useless_gap = 5
 
 -- ========== Autoload ==========
 awful.spawn.with_shell("picom -c --blur-method 'gaussian' --blur-size 10")
+awful.spawn.with_shell("xbindkeys -f /home/vsevolod/.xbindkeysrc")
 awful.spawn.with_shell("/home/vsevolod/change_theme.sh")
 awful.spawn.with_shell("start-pulseaudio-x11")
-awful.spawn.with_shell("/home/vsevolod/.config/polybar/launch.sh")
+awful.spawn.with_shell("polybar")
 
 -- }}}
 
@@ -518,4 +471,13 @@ awful.spawn.with_shell("/home/vsevolod/.config/polybar/launch.sh")
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
+
+-- Функция для сокрытия иконки стима
+local function hide_icon(c)
+    if c.class == "Steam" then
+        awful.client.property.set(c, "_TRAY_ICON_HIDDEN", true)
+    end
+end
+
+client.connect_signal("manage", hide_icon)
 -- }}}
