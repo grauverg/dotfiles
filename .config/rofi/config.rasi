@@ -1,0 +1,31 @@
+configuration {
+    display-drun: "Apps";
+    drun-display-format: "{icon} {name}";
+    font: "MesloLGS NF bold 10";
+    show-icons: true;
+    icon-theme: "Papirus";
+
+    timeout {
+        action: "kb-cancel";
+        delay:  0;
+    }
+
+    filebrowser {
+        directories-first: true;
+        sorting-method:    "name";
+    }
+    eh: 1; 
+}
+
+/* Dark theme */
+@import "~/.cache/wal/colors-rofi-dark"
+
+element {
+    padding: 7px;
+}
+
+listview {
+    columns: 1;
+    lines: 8;
+    scrollbar: false;
+}
