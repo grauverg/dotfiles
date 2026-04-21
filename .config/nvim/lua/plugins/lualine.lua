@@ -1,11 +1,11 @@
 return {
 	"nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-    lualin = require("lualine").setup({
-        options = {
-            theme = "gruvbox-material"
-        }
-    })
-    end
+		lualine = require("lualine").setup({
+			options = {
+				theme = "gruvbox-material",
+			},
+		})
+	end,
 }
