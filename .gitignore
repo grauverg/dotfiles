@@ -128,17 +128,7 @@ node_modules
 .zcompdump-Grauverg-5.9
 .zcompdump-Grauverg-5.9-zwc
 
-########################
-#    PERSONAL FILES    #
-########################
-uni/
-Desktop/
-Documents/
-Downloads/
-Public/
-Templates/
-Videos/
-photos/
+node_modules
+node_modules
 
-python_projects/
-token.git
+uni/
