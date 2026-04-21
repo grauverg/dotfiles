@@ -72,11 +72,29 @@ awful.layout.layouts = {
 	awful.layout.suit.floating,
 	-- awful.layout.suit.spiral.dwindle,
 	-- awful.layout.suit.spiral,
-    -- awful.layout.suit.fair,
+	-- awful.layout.suit.fair,
 	-- awful.layout.suit.corner.ne,
 	-- awful.layout.suit.corner.sw,
 	-- awful.layout.suit.corner.se,
 }
+
+-- Функция для чтения цветов из файла pywal
+local function get_wal_color(line_num)
+	local f = io.open(os.getenv("HOME") .. "/.cache/wal/colors", "r")
+	if not f then
+		return "#fe8019"
+	end
+	local colors = {}
+	for line in f:lines() do
+		table.insert(colors, line)
+	end
+	f:close()
+	return colors[line_num]
+end
+
+local focus_color = get_wal_color(2)
+local normal_color = "#00000000"
+
 -- }}}
 
 -- {{{ Menu
@@ -110,7 +128,7 @@ menubar.utils.terminal = terminal
 
 awful.screen.connect_for_each_screen(function(s)
 	-- Each screen has its own tag table.
-	awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful.layout.layouts[1])
+	awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 end)
 -- }}}
 
@@ -126,7 +144,7 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-	awful.key({ modkey }, "h", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+	awful.key({ modkey }, "]", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 
 	-- view prev window
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
@@ -337,7 +355,7 @@ awful.rules.rules = {
 	{
 		rule = {},
 		properties = {
-			border_width = 0,
+			border_width = 2,
 			border_color = beautiful.border_normal,
 			focus = awful.client.focus.filter,
 			raise = true,
@@ -382,22 +400,15 @@ awful.rules.rules = {
 		},
 		properties = { floating = true },
 	},
-    {
-        rule = { class = "Steam" },
-        properties = { floating = false }
-    },
-    {
-        rule = { class = "TelegramDesktop" },
-        properties = { floating = false}
-    }
-	-- Add titlebars to normal clients and dialogs
-	--    { rule_any = {type = { "normal", "dialog" }
-	--      }, properties = { titlebars_enabled = true }
-	--    },
-
-	-- Set Firefox to always map on the tag named "2" on screen 1.
-	-- { rule = { class = "Firefox" },
-	--   properties = { screen = 1, tag = "2" } },
+	{
+		rule = { class = "Polybar" },
+		properties = {
+			border_width = 0,
+			focusable = false,
+			focus = false,
+			raise = true,
+		},
+	},
 }
 -- }}}
 
@@ -459,24 +470,26 @@ end)
 beautiful.useless_gap = 5
 
 -- ========== Autoload ==========
-awful.spawn.with_shell("picom -c --blur-method 'gaussian' --blur-size 10")
+awful.spawn.with_shell("picom -b")
 awful.spawn.with_shell("xbindkeys -f /home/vsevolod/.xbindkeysrc")
 awful.spawn.with_shell("/home/vsevolod/change_theme.sh")
 awful.spawn.with_shell("start-pulseaudio-x11")
-awful.spawn.with_shell("polybar")
+awful.spawn.with_shell("home/vsevolod/.config/polybar/launch.sh")
 
 -- }}}
 
--- client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("focus", function(c)
+	c.border_color = focus_color
+end)
 client.connect_signal("unfocus", function(c)
-	c.border_color = beautiful.border_normal
+	c.border_color = normal_color
 end)
 
 -- Функция для сокрытия иконки стима
 local function hide_icon(c)
-    if c.class == "Steam" then
-        awful.client.property.set(c, "_TRAY_ICON_HIDDEN", true)
-    end
+	if c.class == "Steam" then
+		awful.client.property.set(c, "_TRAY_ICON_HIDDEN", true)
+	end
 end
 
 client.connect_signal("manage", hide_icon)
