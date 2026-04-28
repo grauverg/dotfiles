@@ -63,9 +63,11 @@
 .config/yandex-browser/
 .config/yandex-music.conf
 .config/yay/
+.config/obs-studio/
+.wget-hsts
+.gitconfig
 
 .vscode-oss/
-.wget-hsts
 .yandex/
 go/
 Pywal/
@@ -75,11 +77,9 @@ gigaide-CE-251.26927.53/
 yay/
 .fonts/
 .foxrc/
-.gitconfig
 .gnupg/
 .gphoto/
 .java/
-.lesshst
 .lgp/
 .local/
 .luarc.json
@@ -104,13 +104,9 @@ yay/
 .vim/
 .viminfo
 .visualizers/
-.xinitrc
 .xserverrc
-.zcompdump-Grauverg-5.9.zwc
-.zprofile
 .zsh_history
 .zshrc.pre-oh-my-zsh
-pygitignore.template
 xorg.conf.new
 
 ########################
@@ -139,6 +135,11 @@ Public/
 Templates/
 Videos/
 photos/
+Заметочная ваульта/
 
 python_projects/
 token.git
+pygitignore.template
+"\320\227\320\260\320\274\320\265\321\202\320\276\321\207\320\275\320\260\321\217 \320\262\320\260\321\203\320\273\321\214\321\202\320\260/"
+.zcompdump-Grauverg-5.9.zwc
+
