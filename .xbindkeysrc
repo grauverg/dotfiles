@@ -7,12 +7,12 @@
 #########################
 
 # set volume by +5
-"pactl set-sink-volume @DEFAULT_SINK@ +10%"
+"bash -c 'current=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | head -1); if [ "$current" -lt 100 ]; then pactl set-sink-volume @DEFAULT_SINK@ +5%; fi'"
   m:0x0 + c:123
   XF86AudioRaiseVolume
 
 # set volume by -5
-"pactl set-sink-volume @DEFAULT_SINK@ -10%"
+"pactl set-sink-volume @DEFAULT_SINK@ -5%"
   m:0x0 + c:122
   XF86AudioLowerVolume
 

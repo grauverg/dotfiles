@@ -63,9 +63,11 @@
 .config/yandex-browser/
 .config/yandex-music.conf
 .config/yay/
+.config/obs-studio/
+.wget-hsts
+.gitconfig
 
 .vscode-oss/
-.wget-hsts
 .yandex/
 go/
 Pywal/
@@ -75,11 +77,9 @@ gigaide-CE-251.26927.53/
 yay/
 .fonts/
 .foxrc/
-.gitconfig
 .gnupg/
 .gphoto/
 .java/
-.lesshst
 .lgp/
 .local/
 .luarc.json
@@ -104,13 +104,9 @@ yay/
 .vim/
 .viminfo
 .visualizers/
-.xinitrc
 .xserverrc
-.zcompdump-Grauverg-5.9.zwc
-.zprofile
 .zsh_history
 .zshrc.pre-oh-my-zsh
-pygitignore.template
 xorg.conf.new
 
 ########################
@@ -128,7 +124,6 @@ node_modules
 .zcompdump-Grauverg-5.9
 .zcompdump-Grauverg-5.9-zwc
 
-node_modules
 node_modules
 
 uni/
