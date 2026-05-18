@@ -13,7 +13,7 @@ quiet=false
 # default theme
 loginbox=00000066
 loginshadow=00000000
-locktext="welcome"
+locktext="vsevolod's computer"
 font="MesloLGSDZ Nerd Font Mono:style=Bold"
 ringcolor=ffffff80
 insidecolor=00000000
@@ -28,7 +28,7 @@ greetercolor=ffffffff
 layoutcolor=ffffffff
 keyhlcolor=d23c3dff
 bshlcolor=d23c3dff
-veriftext="hmmm..."
+veriftext=""
 verifcolor=ffff00ff
 wrongtext="meh"
 wrongcolor=d23c3dff
