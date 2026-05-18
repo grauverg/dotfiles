@@ -24,8 +24,6 @@ editor_cmd = terminal .. " -e " .. editor
 
 awful.layout.layouts = {
 	awful.layout.suit.tile,
-	awful.layout.suit.floating,
-	awful.layout.suit.spiral,
 }
 
 awful.screen.connect_for_each_screen(function(s)
