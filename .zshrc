@@ -17,6 +17,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="awesomepanda"
 
+# autocomplete plugin for zsh
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -77,7 +79,10 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git 
+  zsh-autosuggestions
+  )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,11 +112,11 @@ source $ZSH/oh-my-zsh.sh
 alias pac="sudo pacman" # fast way to use pacman
 alias wp="wal -i $HOME/Downloads/wallpapers/"
 alias theme="sudo sh $HOME/change_theme.sh" 
-alias btconn="sh $HOME/bt_connect.sh" # connect my headphones
+alias {bt,btconn}="sh $HOME/bt_connect.sh" # connect my headphones
 alias discon="sh $HOME/bt_connect.sh disconnect"
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias wifi='nmcli device wifi' # turn wifi on
+alias {wifi,цшаш,цшфш}='nmcli device wifi' # turn wifi on
 
 # get photos
 alias photo="cd $HOME/photos/рассорт && gphoto2 --get-all-files && cd $HOME"
@@ -122,15 +127,15 @@ alias zconf="nvim $HOME/.zshrc"
 alias ohmyzsh="nvim $HOME/.oh-my-zsh"
 
 # awesome
-alias awconf="nvim $HOME/.config/awesome/rc.lua"
+alias awconf="nvim $HOME/.config/awesome/"
 alias awch="awesome -k"
 
 # vim 
-alias v="nvim"
-alias nvimconf="nvim $HOME/.config/nvim/init.lua"
+alias {v,nv,vim,vi}="nvim"
+alias nvconf="nvim $HOME/.config/nvim/init.lua"
 
 # kitty
-alias kittyconf, kconf="nvim $HOME/.config/kitty/kitty.conf"
+alias {kittyconf,kconf}="nvim $HOME/.config/kitty/kitty.conf"
 
 # polybar
 alias pconf="nvim $HOME/.config/polybar/config.ini"
@@ -182,3 +187,16 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 xbindkeys -f $HOME/.xbindkeysrc
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}
+
